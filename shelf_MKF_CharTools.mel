@@ -1,0 +1,128 @@
+global proc shelf_MKF_CharTools () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "select_ALL.png" 
+        -image1 "select_ALL.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n\nctrlSel = []\ndriverCaraStr = 'DRIVER_CARA'\ndriverCara = ''\nfor x in cmds.ls(et='nurbsCurve'):\n\n\n\tif x.find('DRIVER') != -1:\n\t\txParent = cmds.listRelatives(x, p=True)[0]\n\t\tctrlSel.append(xParent)\n\n\tif x.find(driverCaraStr) != -1:\n\t\tdriverCara = x\n\ndriverCaraParent = cmds.listRelatives(driverCara, p=True, f=True)[0]\ndriverCaraChildren = cmds.listRelatives(driverCaraParent, ad=True, f=True)\n\nfor y in driverCaraChildren:\n\tif cmds.objectType(y) == 'nurbsCurve':\n\t\tyParent = cmds.listRelatives(y, p=True, f=True)[0]\n\t\tctrlSel.append(yParent)\n\ncmds.select(cl=True)\ncmds.select(ctrlSel)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "select_body.png" 
+        -image1 "select_body.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n\nctrlSel = []\navoidCtrls = ['DRIVER_CARA']\n\nfor x in cmds.ls(et='nurbsCurve'):\n\tavoid = False\n\n\tfor ctrl in avoidCtrls:\n\t\tif x.find(ctrl) == -1:\n\t\t\tavoid = True\n\n\tif x.find('DRIVER') != -1 and avoid == True:\n\t\txParent = cmds.listRelatives(x, p=True)[0]\n\t\tctrlSel.append(xParent)\n\ncmds.select(cl=True)\ncmds.select(ctrlSel)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "select_face.png" 
+        -image1 "select_face.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n\nctrlSel = []\ndriverCaraStr = 'DRIVER_CARA'\ndriverCara = ''\nfor x in cmds.ls(et='nurbsCurve'):\n\n\tif x.find(driverCaraStr) != -1:\n\t\tdriverCara = x\n\ndriverCaraParent = cmds.listRelatives(driverCara, p=True, f=True)[0]\ndriverCaraChildren = cmds.listRelatives(driverCaraParent, ad=True, f=True)\n\nfor y in driverCaraChildren:\n\tif cmds.objectType(y) == 'nurbsCurve':\n\t\tyParent = cmds.listRelatives(y, p=True, f=True)[0]\n\t\tctrlSel.append(yParent)\n\ncmds.select(cl=True)\ncmds.select(ctrlSel)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "select_L_fingers.png" 
+        -image1 "select_L_fingers.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n\nvalidWords = ['INDEX', 'THUMB', 'MIDDLE', 'CANCEL', 'PINKY']\nside = 'IZQ'\n\nlistSel = []\n\nfor finger in cmds.ls(et='nurbsCurve'):\n    valid = False\n    for word in validWords:\n        if finger.find(word) != -1:\n            valid = True\n    \n    if valid == True and finger.find(side) != -1:\n        fingerParent = cmds.listRelatives(finger, p=True, f=True)[0]\n        listSel.append(fingerParent)\n        \ncmds.select(cl=True)\ncmds.select(listSel)\n" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "select_R_fingers.png" 
+        -image1 "select_R_fingers.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n\nvalidWords = ['INDEX', 'THUMB', 'MIDDLE', 'CANCEL', 'PINKY']\nside = 'DER'\n\nlistSel = []\n\nfor finger in cmds.ls(et='nurbsCurve'):\n    valid = False\n    for word in validWords:\n        if finger.find(word) != -1:\n            valid = True\n    \n    if valid == True and finger.find(side) != -1:\n        fingerParent = cmds.listRelatives(finger, p=True, f=True)[0]\n        listSel.append(fingerParent)\n        \ncmds.select(cl=True)\ncmds.select(listSel)\n" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+
+} 
